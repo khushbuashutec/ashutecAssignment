@@ -1,0 +1,28 @@
+.filterHeader{
+    display:flex;
+    justify-content: space-between;
+    padding:15px 0;
+}
+.form{
+    display:flex;
+   flex-direction: row;
+    justify-content: space-evenly;
+}
+.cardButton{
+    display:flex;
+    justify-content: space-between;
+    background-color: rgba(0,0,0,.03);
+}
+.green{
+    color:green;
+}
+.red{
+    color:red;
+}
+.description{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
