@@ -1,4 +1,4 @@
-import { AppBar, Autocomplete, Button, FormGroup, IconButton, InputAdornment, InputLabel, TextField } from "@mui/material"
+import { AppBar, Autocomplete, Button, Divider, FormGroup, IconButton, InputAdornment, InputLabel, TextField } from "@mui/material"
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useState } from "react";
 import { Box, typography } from "@mui/system";
@@ -6,11 +6,12 @@ import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import classes from './product.module.css'
 import SearchIcon from '@mui/icons-material/Search';
 
-const Filter = () => {
+const Filter = ({ data }) => {
     const [activeClick, setActiveClick] = useState(false)
     const handleClick = () => {
         setActiveClick(!activeClick)
     }
+
     return (
         <>
             <Box sx={{ width: '100%', }}>
@@ -38,13 +39,14 @@ const Filter = () => {
             </Box>
             {activeClick && <div>
                 <Box>
+                    <Divider />
                     <FormGroup className={classes.form}>
                         <div>
                             <InputLabel>Categories</InputLabel>
                             <Autocomplete
                                 disablePortal
                                 id="combo-box-demo"
-                                options={[1, 2, 3, 4, 5]}
+                                options={data.map((product) => product.title)}
                                 sx={{ width: 250, height: 0 }}
                                 // InputProps={{ style: { height: 0 } }}
                                 renderInput={(params) => <TextField {...params} label="choose..." />}
@@ -55,7 +57,7 @@ const Filter = () => {
                             <Autocomplete
                                 disablePortal
                                 id="combo-box-demo"
-                                options={[1, 2, 3, 4, 5]}
+                                options={[...new Set(data.flatMap((data) => data.rating))]}
                                 sx={{ width: 250 }}
                                 renderInput={(params) => <TextField {...params} label="choose..." />}
                             />
@@ -65,7 +67,7 @@ const Filter = () => {
                             <Autocomplete
                                 disablePortal
                                 id="combo-box-demo"
-                                options={[1, 2, 3, 4, 5]}
+                                options={[...new Set(data.flatMap((data) => data.locations))]}
                                 sx={{ width: 250 }}
                                 renderInput={(params) => <TextField {...params} label="choose..." />}
                             />
@@ -75,7 +77,7 @@ const Filter = () => {
                             <Autocomplete
                                 disablePortal
                                 id="combo-box-demo"
-                                options={[1, 2, 3, 4, 5]}
+                                options={data.map((product) => product.price)}
                                 sx={{ width: 250, height: '50px' }}
                                 renderInput={(params) => <TextField {...params} label="choose..." />}
                             />

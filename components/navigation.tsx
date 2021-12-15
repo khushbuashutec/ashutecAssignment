@@ -4,8 +4,8 @@ import DehazeIcon from '@mui/icons-material/Dehaze';
 import ClearIcon from '@mui/icons-material/Clear';
 import ShoppingCartSharpIcon from '@mui/icons-material/ShoppingCartSharp';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
-
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const Navigation = () => {
     const [activeClick, setActiveClick] = useState(false)
@@ -13,6 +13,7 @@ const Navigation = () => {
         setActiveClick(!activeClick)
 
     }
+    const router = useRouter()
     return (
         <div>
             <Box sx={{ width: '100%', backgroundColor: '#060b26', height: 80, }}>
@@ -33,8 +34,10 @@ const Navigation = () => {
                                 <ListItemText primary="Product" sx={{ color: 'white' }} ></ListItemText>
                             </ListItemButton>
                         </ListItem>
-                        <ListItem>
-                            <ListItemButton>
+                        <ListItem onClick={() => {
+                            router.push("/trash")
+                        }}>
+                            < ListItemButton >
                                 <ListItemIcon>
                                     <DeleteForeverSharpIcon sx={{ color: 'white' }} fontSize="medium" />
                                 </ListItemIcon>

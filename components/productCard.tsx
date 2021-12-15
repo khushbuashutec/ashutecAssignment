@@ -1,20 +1,22 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Divider, IconButton, Typography } from "@mui/material"
+import { Button, Card, CardActions, CardContent, CardMedia, Divider, Typography, IconButton } from "@mui/material"
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import classes from './product.module.css'
-import { productType } from "./product";
-const ProductCard = ({ data }): productType => {
-    const {
-        id,
-        title,
-        Description,
-        image,
-        category,
-        rating,
-        locations,
-        price,
-        inStock
-    } = data;
+import EditForm from "../pages/EditForm";
+import { useRouter } from "next/router";
+import { productType } from "./type/product";
+interface ProductCardInterface {
+    data: productType;
+    key: number;
+    handleDelete: (id: number) => void;
+}
+
+
+const ProductCard = ({ data, key, handleDelete }: ProductCardInterface) => {
+
+
+    const router = useRouter();
+    const { image, title, Description, price, inStock, id } = data;
     return (
         <Card sx={{
             maxWidth: 300,
@@ -27,7 +29,6 @@ const ProductCard = ({ data }): productType => {
                 height="140"
                 image={image}
                 alt={title}
-            // sx={{ border: '1px solid grey' }}
             />
             <CardContent>
 
@@ -48,18 +49,22 @@ const ProductCard = ({ data }): productType => {
             </CardContent>
             <Divider />
             <CardActions className={classes.cardButton}>
-                <Button size="small">
-                    <IconButton>
-                        <DeleteForeverOutlinedIcon sx={{ color: 'red', width: 20 }} />
-                    </IconButton>
-                </Button>
-                <Button size="small">
-                    <IconButton>
-                        <EditOutlinedIcon sx={{ color: 'blue', width: 20 }} />
-                    </IconButton>
-                </Button>
+                <IconButton onClick={() => handleDelete(id)}>
+                    <DeleteForeverOutlinedIcon
+                        sx={{ color: 'red', width: 20, }}
+
+                    />
+                </IconButton>
+
+
+                <IconButton >
+                    <EditOutlinedIcon
+                        sx={{ color: 'blue', width: 20 }}
+
+                    />
+                </IconButton>
             </CardActions>
-        </Card>)
+        </Card >)
 
 }
 export default ProductCard
